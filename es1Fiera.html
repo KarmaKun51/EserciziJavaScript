@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Fiera</title>
+
+        <script>
+            var numeroPartecipanti;
+            
+
+            function inserisciCaselle(){
+                numeroPartecipanti=10;
+
+                    //Creazione del Blocco dove andranno inseriti gli input
+                    var bloccoInput = document.getElementById("campoInput");
+                    var label_avviso = document.createElement("label");
+                    label_avviso.innerHTML = "Inserisci l'Età dei Partecipanti\n";
+                    bloccoInput.appendChild(label_avviso);
+
+                    for(var i=0; i<numeroPartecipanti; i++){
+                        var casellaInput = document.createElement("input");
+                        casellaInput.setAttribute("id", i);
+                        casellaInput.setAttribute("type", "text");
+
+                        bloccoInput.appendChild(casellaInput);
+                    }
+                }
+
+            function calcola(){
+                var numeroMinore=0;
+                var sommaEta =0;
+                var numeroUltraSessatacinquenni=0;
+                var etaMedia= 0;
+
+                    for(var i=0; i<numeroPartecipanti; i++){
+                        var etaPartecipante = eval(document.getElementById(i).value);
+                        //Contare il Numero dei Minorenni, degli Ultrasessantacinquenni e calcolo della media
+                        sommaEta = sommaEta +etaPartecipante;
+                        if(etaPartecipante<18){
+                            numeroMinorenni++;
+                            if(etaPartecipante>65){
+                                numeroUltraSessatacinquenni++;
+                            }
+                        }
+                    }
+                    etaMedia = etaPartecipante/numeroPartecipanti;
+
+                    //Creazione della Label dove andranno inseriti i Dati di Outputs
+                    var labelOutput = document.createElement("label");
+                    labelOutput.innerHTML = "\nEtà media: " +etaMedia +
+                                            "\nNumero Minorenni: " + numeroMinore +
+                                            "\nNumero Ultrasessantacinquenni: " + numeroUltraSessatacinquenni;
+                    var bloccoOut=document.getElementById("campoOutput");
+                    bloccoOut.appendChild(labelOutput);
+                
+            }
+        </script>
+
+    </head>
+    <body>
+        <h1>Età Partecipanti</h1>
+        <button type="button" onclick="inserisciCaselle()">Inserisci l'Età dei 10 partecipanti</button>
+        <button type="button" onclick="calcola()">Visualizza Dati</button>
+        <input type="button" value="Reset" onclick="window.location.reload()">
+        <div id="campoInput"></div>
+        <div id="campoOutput"></div>
+    </body>
+</html>
